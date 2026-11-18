@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block titulo %}Categorias · Controle Financeiro{% endblock %}
+{% block conteudo %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3 mb-0">Categorias</h1>
+  <a href="{% url 'categoria_create' %}" class="btn btn-primary">+ Nova categoria</a>
+</div>
+<div class="card shadow-sm">
+  <div class="table-responsive">
+    <table class="table table-hover mb-0 align-middle">
+      <thead class="table-light"><tr><th>Nome</th><th>Tipo</th><th></th></tr></thead>
+      <tbody>
+      {% for categoria in object_list %}
+        <tr>
+          <td>{{ categoria.nome }}</td>
+          <td><span class="badge {% if categoria.tipo == 'R' %}text-bg-success{% else %}text-bg-danger{% endif %}">{{ categoria.get_tipo_display }}</span></td>
+          <td class="text-end text-nowrap">
+            <a href="{% url 'categoria_update' categoria.pk %}" class="btn btn-sm btn-outline-secondary">Editar</a>
+            <a href="{% url 'categoria_delete' categoria.pk %}" class="btn btn-sm btn-outline-danger">Excluir</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="3" class="text-center text-muted py-4">Nenhuma categoria cadastrada.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

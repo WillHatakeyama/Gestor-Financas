@@ -1,0 +1,20 @@
+body { background: #f5f6f8; }
+
+/* Aplica o visual do Bootstrap aos campos gerados pelo Django */
+.campo input:not([type=checkbox]),
+.campo select,
+.campo textarea {
+  display: block;
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: .375rem;
+  background-color: #fff;
+}
+.campo input:focus, .campo select:focus, .campo textarea:focus {
+  outline: 0;
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25);
+}
+.campo ul { padding-left: 1rem; margin-bottom: 0; }

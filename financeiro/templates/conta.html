@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block titulo %}Contas · Controle Financeiro{% endblock %}
+{% block conteudo %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h3 mb-0">Contas</h1>
+  <a href="{% url 'conta_create' %}" class="btn btn-primary">+ Nova conta</a>
+</div>
+<div class="card shadow-sm">
+  <div class="table-responsive">
+    <table class="table table-hover mb-0 align-middle">
+      <thead class="table-light">
+        <tr><th>Nome</th><th>Tipo</th><th class="text-end">Saldo inicial</th><th class="text-end">Saldo atual</th><th></th></tr>
+      </thead>
+      <tbody>
+      {% for conta in object_list %}
+        <tr>
+          <td>{{ conta.nome }}</td>
+          <td>{{ conta.get_tipo_display }}</td>
+          <td class="text-end">R$ {{ conta.saldo_inicial|floatformat:"2g" }}</td>
+          <td class="text-end fw-semibold {% if conta.saldo_atual < 0 %}text-danger{% endif %}">R$ {{ conta.saldo_atual|floatformat:"2g" }}</td>
+          <td class="text-end text-nowrap">
+            <a href="{% url 'conta_update' conta.pk %}" class="btn btn-sm btn-outline-secondary">Editar</a>
+            <a href="{% url 'conta_delete' conta.pk %}" class="btn btn-sm btn-outline-danger">Excluir</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="5" class="text-center text-muted py-4">Nenhuma conta cadastrada.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
